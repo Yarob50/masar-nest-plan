@@ -4,12 +4,14 @@ import { DataSource, Repository } from 'typeorm';
 import { faker } from '@faker-js/faker';
 import { User } from './user/entities/user.entity';
 import { Customer } from './user/entities/customer.entity';
+import { RedisService } from './redis/redis.service';
 
 @Controller()
 export class AppController {
   constructor(
     private readonly appService: AppService,
     private readonly dataSource: DataSource,
+    private readonly redisService: RedisService,
   ) {}
 
   @Get()
@@ -106,5 +108,20 @@ export class AppController {
     }
 
     return 'done';
+  }
+
+  @Get('/testRedis')
+  async testRedis() {
+    const key = 'app:yarob:expKey';
+    const value = 'testValue';
+
+    // await this.redisService.set(key, value);
+
+    await this.redisService.setWithExpiration(key, value, 10); // 10 seconds
+    const result = await this.redisService.get(key);
+
+    //
+
+    return result;
   }
 }
