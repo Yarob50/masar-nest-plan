@@ -11,7 +11,7 @@ export class AppController {
   constructor(
     private readonly appService: AppService,
     private readonly dataSource: DataSource,
-    private readonly redisService: RedisService,
+    // private readonly redisService: RedisService,
   ) {}
 
   @Get()
@@ -117,11 +117,11 @@ export class AppController {
 
     // await this.redisService.set(key, value);
 
-    await this.redisService.setWithExpiration(key, value, 10); // 10 seconds
-    const result = await this.redisService.get(key);
+    // await this.redisService.setWithExpiration(key, value, 10); // 10 seconds
+    // const result = await this.redisService.get(key);
 
     //
 
-    return result;
+    return 'result';
   }
 }
