@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
-import { RedisService } from './redis/redis.service';
+// import { RedisService } from './redis/redis.service';
 import { CustomerModule } from './customer/customer.module';
 import { ConfigModule } from '@nestjs/config';
 
@@ -46,6 +46,9 @@ console.log(entitiesPath);
     CustomerModule,
   ],
   controllers: [AppController],
-  providers: [AppService, RedisService],
+  providers: [
+    AppService,
+    // RedisService
+  ],
 })
 export class AppModule {}
